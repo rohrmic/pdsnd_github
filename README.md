@@ -56,3 +56,5 @@ https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html
 https://docs.scipy.org/doc/numpy/reference/generated/numpy.percentile.html
 https://www.codementor.io/sheena/how-to-write-python-custom-exceptions-du107ufv9
 
+[Motivate]: <https://www.motivateco.com/>
+
