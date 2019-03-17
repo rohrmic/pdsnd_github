@@ -15,6 +15,9 @@ MONTHS = ['January','February','March','April',
 
 DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 
+def print_calc_time(start_time):
+    print("\ncalculation time: %s" % (time.time() - start_time))
+
 def convert_seconds(seconds):
     """
     Converts seconds into days, hours, minutes and remaining seconds.
@@ -49,7 +52,7 @@ def check_null_columns(df, city):
         for index, val in ds.iteritems():
             print("{}: {} / {}%".format(index, val, round(100*val/len(df.index), 2)))
         
-    print("\ncalculation time: %s" % (time.time() - start_time))
+    print_calc_time(start_time)
     print('-'*75)
 
 def get_filters():
@@ -208,7 +211,7 @@ def time_stats(df):
     popular_hour = df['hour'].mode()[0]
     print('Hour:', popular_hour)
 
-    print("\ncalculation time: %s" % (time.time() - start_time))
+    print_calc_time(start_time)
     print('-'*75)
 
 def station_stats(df):
@@ -246,7 +249,7 @@ def station_stats(df):
     print("\nMost popular trip(s):")
     print_without_index(routes)
     
-    print("\ncalculation time: %s" % (time.time() - start_time))
+    print_calc_time(start_time)
     print('-'*75)
 
 def trip_duration_stats(df):
@@ -284,7 +287,7 @@ def trip_duration_stats(df):
     d, h, m, s = convert_seconds(max_duration)
     print("\nMax (%i seconds):\n" % (max_duration) + time_string % (d, h, m, s))
 
-    print("\ncalculation time: %s" % (time.time() - start_time))
+    print_calc_time(start_time)
     print('-'*75)
 
 def user_stats(df):
@@ -321,7 +324,7 @@ def user_stats(df):
         print('  Latest:', int(df['Birth Year'].max()))
         print('  Most Common:', int(df['Birth Year'].mode()[0]))
         
-    print("\ncalculation time: %s" % (time.time() - start_time))
+    print_calc_time(start_time)
     print('-'*75)
 
 def print_drill_down_menu(city):    
