@@ -254,33 +254,35 @@ def trip_duration_stats(df):
 
     start_time = time.time()
     
+    time_string = "%i days, %i hours, %i minutes, %i seconds"
+    
     count = df['Trip Duration'].count()
     print('\n3) Travel time statistics for a total of %i trips\n' % (count))
     
     # display total travel time
     duration = df['Trip Duration'].sum()
     d, h, m, s = convert_seconds(duration)
-    print("Total duration (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (duration, d, h, m, s))
+    print("Total duration (%i seconds):\n" % (duration) + time_string % (d, h, m, s))
     
     # display mean travel time
     mean = df['Trip Duration'].mean()
     d, h, m, s = convert_seconds(mean)
-    print("\nMean (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (mean, d, h, m, s))
+    print("\nMean (%i seconds):\n" % (mean) + time_string % (d, h, m, s))
     
-    # display mean travel time
+    # display median travel time
     median = df['Trip Duration'].median()
     d, h, m, s = convert_seconds(median)
-    print("\nMedian (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (median, d, h, m, s))
-    
+    print("\nMedian (%i seconds):\n" % (median) + time_string % (d, h, m, s))
+
     # display min travel time
     min_duration = df['Trip Duration'].min()
     d, h, m, s = convert_seconds(min_duration)
-    print("\nMin (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (min_duration, d, h, m, s))
+    print("\nMin (%i seconds):\n" % (min_duration) + time_string % (d, h, m, s))
 
     # display max travel time
     max_duration = df['Trip Duration'].max()
     d, h, m, s = convert_seconds(max_duration)
-    print("\nMax (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (max_duration, d, h, m, s))
+    print("\nMax (%i seconds):\n" % (max_duration) + time_string % (d, h, m, s))
 
     print("\ncalculation time: %s" % (time.time() - start_time))
     print('-'*75)
