@@ -15,6 +15,14 @@ MONTHS = ['January','February','March','April',
 
 DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 
+HR_LENGTH = 75
+
+def print_calc_time(start_time):
+    print("\ncalculation time: %s" % (time.time() - start_time))
+
+def print_hr(length=HR_LENGTH):
+    print('-'*length)
+
 def convert_seconds(seconds):
     """
     Converts seconds into days, hours, minutes and remaining seconds.
@@ -49,8 +57,8 @@ def check_null_columns(df, city):
         for index, val in ds.iteritems():
             print("{}: {} / {}%".format(index, val, round(100*val/len(df.index), 2)))
         
-    print("\ncalculation time: %s" % (time.time() - start_time))
-    print('-'*75)
+    print_calc_time(start_time)
+    print_hr()
 
 def get_filters():
     """
@@ -146,7 +154,7 @@ def get_filters():
             except ValueError:
                 print("\nPlease type either 'yes' or 'no'.")
     
-    print('-'*75)
+    print_hr()
     return city, month, day
 
 
@@ -208,8 +216,8 @@ def time_stats(df):
     popular_hour = df['hour'].mode()[0]
     print('Hour:', popular_hour)
 
-    print("\ncalculation time: %s" % (time.time() - start_time))
-    print('-'*75)
+    print_calc_time(start_time)
+    print_hr()
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip(s)."""
@@ -246,13 +254,15 @@ def station_stats(df):
     print("\nMost popular trip(s):")
     print_without_index(routes)
     
-    print("\ncalculation time: %s" % (time.time() - start_time))
-    print('-'*75)
+    print_calc_time(start_time)
+    print_hr()
 
 def trip_duration_stats(df):
     """Displays statistics on the number of trips and the total and average trip duration."""
 
     start_time = time.time()
+    
+    time_string = "%i days, %i hours, %i minutes, %i seconds"
     
     count = df['Trip Duration'].count()
     print('\n3) Travel time statistics for a total of %i trips\n' % (count))
@@ -260,30 +270,30 @@ def trip_duration_stats(df):
     # display total travel time
     duration = df['Trip Duration'].sum()
     d, h, m, s = convert_seconds(duration)
-    print("Total duration (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (duration, d, h, m, s))
+    print("Total duration (%i seconds):\n" % (duration) + time_string % (d, h, m, s))
     
     # display mean travel time
     mean = df['Trip Duration'].mean()
     d, h, m, s = convert_seconds(mean)
-    print("\nMean (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (mean, d, h, m, s))
+    print("\nMean (%i seconds):\n" % (mean) + time_string % (d, h, m, s))
     
-    # display mean travel time
+    # display median travel time
     median = df['Trip Duration'].median()
     d, h, m, s = convert_seconds(median)
-    print("\nMedian (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (median, d, h, m, s))
-    
+    print("\nMedian (%i seconds):\n" % (median) + time_string % (d, h, m, s))
+
     # display min travel time
     min_duration = df['Trip Duration'].min()
     d, h, m, s = convert_seconds(min_duration)
-    print("\nMin (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (min_duration, d, h, m, s))
+    print("\nMin (%i seconds):\n" % (min_duration) + time_string % (d, h, m, s))
 
     # display max travel time
     max_duration = df['Trip Duration'].max()
     d, h, m, s = convert_seconds(max_duration)
-    print("\nMax (%i seconds):\n  %i days, %i hours, %i minutes, %i seconds" % (max_duration, d, h, m, s))
+    print("\nMax (%i seconds):\n" % (max_duration) + time_string % (d, h, m, s))
 
-    print("\ncalculation time: %s" % (time.time() - start_time))
-    print('-'*75)
+    print_calc_time(start_time)
+    print_hr()
 
 def user_stats(df):
     """
@@ -319,8 +329,8 @@ def user_stats(df):
         print('  Latest:', int(df['Birth Year'].max()))
         print('  Most Common:', int(df['Birth Year'].mode()[0]))
         
-    print("\ncalculation time: %s" % (time.time() - start_time))
-    print('-'*75)
+    print_calc_time(start_time)
+    print_hr()
 
 def print_drill_down_menu(city):    
     print("\nDRILL DOWN ({})".format(CITIES[city-1].title()))
@@ -392,7 +402,7 @@ def show_start_time_data(df):
         #print(time_data)
         print_without_index(time_data)
         
-    print('-'*75)
+    print_hr()
     
 def show_stations_data(df):
     '''Displays the 5 most popular start/end stations and trips'''
@@ -450,7 +460,7 @@ def show_stations_data(df):
     print("\ntrips:") 
     print_without_index(sorted_desc_df_trip)
     
-    print('-'*75)
+    print_hr()
 
 def get_duration_values(df, month):
     '''
@@ -504,7 +514,7 @@ def show_duration_data(df):
 
     print(duration_data)
         
-    print('-'*75)
+    print_hr()
     
 def show_user_age_data(df):
     """
@@ -542,7 +552,7 @@ def show_user_age_data(df):
         print("\ncount decending:")
         print_without_index(sorted_by_count)
         
-    print('-'*75)
+    print_hr()
 
 def show_raw_data(df):
     '''Display top 5 rows of filtered dataframe (raw data)'''
@@ -551,7 +561,7 @@ def show_raw_data(df):
     
     print(df.head())
     
-    print('-'*75)
+    print_hr()
     
 
 
